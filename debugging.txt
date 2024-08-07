@@ -1,0 +1,10 @@
+error #1 - centering divs
+solution - specifying their fixed size
+
+error #2 - form submission
+solution - setting an 'addEventListener' for 'submit' and putting a callback function within it. inside the callback function, declare a new div which will contain
+the other divs
+
+error #3 - crossing out the specific divs created on click
+adding their onclick functionality by using an anonymous function which makes a call to another separate function with the 'id' parameter. the id in this case is a
+randomly generated number from 0 to 100.

@@ -39,12 +39,17 @@ form.addEventListener("submit", (e) => {
 
     const newImg = document.createElement('img');
     newImg.src = './trash.png';
-    newImg.classList.add("absolute", "bottom-0", "right-0", "w-5", "h-5");
+    newImg.classList.add("absolute", "bottom-0", "right-0", "w-8", "h-8");
     newImg.addEventListener("click", function() {
         onImgClick(mainDiv.id);
     })
 
+    const editImg = document.createElement('img');
+    editImg.src = './pencil.png';
+    editImg.classList.add("absolute", "bottom-0", "left-0", "w-8", "h-8");
+
     mainDiv.appendChild(newImg);
+    mainDiv.appendChild(editImg);
 
     const newEntry = document.createElement('p');
 

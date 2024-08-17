@@ -1,3 +1,8 @@
+const dateNow = document.getElementById("date");
+
+let currDate = new Date();
+dateNow.textContent = currDate.toLocaleDateString('en-GB');
+
 const noteBox = document.getElementById("note");
 
 const noteInput = function() {
@@ -12,7 +17,13 @@ const onDivClick = function(id) {
     console.log(`task ${id} was clicked`);
 
     const para = document.getElementById(id);
-    para.classList.add("line-through");
+    let classes = para.classList;
+
+    if (classes.contains("line-through")) {
+        para.classList.remove("line-through");
+    } else {
+        para.classList.add("line-through");
+    }
 }
 
 const onImgClick = function(divId) {
@@ -33,7 +44,7 @@ form.addEventListener("submit", (e) => {
     mainDiv.id = Math.floor(Math.random() * 100);
 
     const newDiv = document.createElement('div');
-    newDiv.classList.add("mx-auto", "justify-center", "align-center", "w-[450px]", "mt-4", "mb-4");
+    newDiv.classList.add("mx-auto", "justify-center", "align-center", "w-[250px]", "mt-4", "mb-6");
 
     mainDiv.appendChild(newDiv);
 
@@ -54,7 +65,7 @@ form.addEventListener("submit", (e) => {
     const newEntry = document.createElement('p');
 
     newEntry.textContent = notetext.value;
-    newEntry.classList.add("text-white", "text-center", "text-3xl", "cursor-pointer");
+    newEntry.classList.add("text-white", "text-center", "text-2xl", "cursor-pointer");
     newEntry.id = Math.floor(Math.random() * 100);
     newEntry.addEventListener('click', function() {
         onDivClick(newEntry.id);

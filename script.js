@@ -31,20 +31,48 @@ const onImgClick = function(divId) {
     element.remove();
 }
 
+const onEditClick = function(divId, note) {
+    let og = note;
+    const editForm = document.createElement("form");
+    const editInput = document.createElement("input");
+
+    editInput.classList.add("mx-auto", "justify-center", "align-center", "w-[250px]", "mt-4", "mb-6", "absolute", "z-10");
+
+    editForm.appendChild(editInput);
+
+    editInput.value = og;
+
+    const element = document.getElementById(divId);
+
+    element.appendChild(editForm);
+
+    editForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        let newEntry = element.querySelector("p");
+
+        newEntry.textContent = editInput.value;
+
+        element.removeChild(editForm);
+    })
+}
+
+
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
     notelist.classList.remove("hidden");
     notelist.classList.add("block");
 
-    const notetext = document.getElementById("noteText");
+    let notetext = document.getElementById("noteText");
 
     const mainDiv = document.createElement('div');
-    mainDiv.classList.add("mx-auto", "relative", "justify-center", "align-center", "w-[650px]", "mt-4", "mb-4");
+    mainDiv.classList.add("mx-auto", "relative", "z-0", "justify-center", "align-center", "w-[650px]", "mt-4", "mb-4");
     mainDiv.id = Math.floor(Math.random() * 100);
 
     const newDiv = document.createElement('div');
     newDiv.classList.add("mx-auto", "justify-center", "align-center", "w-[250px]", "mt-4", "mb-6");
+    newDiv.id = Math.floor(Math.random() * 100);
 
     mainDiv.appendChild(newDiv);
 
@@ -70,6 +98,10 @@ form.addEventListener("submit", (e) => {
     newEntry.addEventListener('click', function() {
         onDivClick(newEntry.id);
     });
+
+    editImg.addEventListener("click", function() {
+        onEditClick(newDiv.id, newEntry.textContent);
+    })
 
     newDiv.appendChild(newEntry);
     notelist.appendChild(mainDiv);

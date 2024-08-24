@@ -8,3 +8,10 @@ the other divs
 error #3 - crossing out the specific divs created on click
 adding their onclick functionality by using an anonymous function which makes a call to another separate function with the 'id' parameter. the id in this case is a
 randomly generated number from 0 to 100.
+
+fix #4 - added an alternative crossing out feature to tasks
+in the onclick functionality of the tasks, first i verified whether the classlist contains linethrough or not. if yes, remove it. if not, add it.
+
+fix #5 - added the edit functionality by adding an input form on click which takes in the specific div which needs to be updated as well as the content of the
+already generated entry as parameters. in the onsubmit event listener of the form, update the values by query selecting the "p" elements in the div (there's only one)
+and updating their text content with the input value.

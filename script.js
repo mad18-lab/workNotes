@@ -36,7 +36,9 @@ const onEditClick = function(divId, note) {
     const editForm = document.createElement("form");
     const editInput = document.createElement("input");
 
-    editInput.classList.add("mx-auto", "justify-center", "align-center", "w-[250px]", "mt-4", "mb-6", "absolute", "z-10");
+    editForm.classList.add("absolute", "-inset-3");
+
+    editInput.classList.add("mx-auto", "relative", "justify-center", "align-center", "w-[510px]", "h-[85px]", "mt-4", "mb-6", "pl-2", "rounded-md");
 
     editForm.appendChild(editInput);
 
@@ -67,11 +69,11 @@ form.addEventListener("submit", (e) => {
     let notetext = document.getElementById("noteText");
 
     const mainDiv = document.createElement('div');
-    mainDiv.classList.add("mx-auto", "relative", "z-0", "justify-center", "align-center", "w-[650px]", "mt-4", "mb-4");
+    mainDiv.classList.add("mx-auto", "relative", "justify-start", "align-center", "w-[650px]", "mt-6", "mb-10", "h-[85px]", "flex", "flex-col-reverse", "animate-fade-in-left");
     mainDiv.id = Math.floor(Math.random() * 100);
 
     const newDiv = document.createElement('div');
-    newDiv.classList.add("mx-auto", "justify-center", "align-center", "w-[250px]", "mt-4", "mb-6");
+    newDiv.classList.add("mx-auto", "relative", "justify-center", "align-center", "w-[510px]", "mb-6");
     newDiv.id = Math.floor(Math.random() * 100);
 
     mainDiv.appendChild(newDiv);
@@ -93,7 +95,7 @@ form.addEventListener("submit", (e) => {
     const newEntry = document.createElement('p');
 
     newEntry.textContent = notetext.value;
-    newEntry.classList.add("text-white", "text-center", "text-2xl", "cursor-pointer");
+    newEntry.classList.add("text-white", "text-center", "text-2xl", "cursor-pointer", "align-center");
     newEntry.id = Math.floor(Math.random() * 100);
     newEntry.addEventListener('click', function() {
         onDivClick(newEntry.id);

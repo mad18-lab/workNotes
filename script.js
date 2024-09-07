@@ -6,8 +6,13 @@ dateNow.textContent = currDate.toLocaleDateString('en-GB');
 const noteBox = document.getElementById("note");
 
 const noteInput = function() {
-    noteBox.classList.remove("hidden");
-    noteBox.classList.add("block");
+    let noteClass = noteBox.classList;
+
+    if (noteClass.contains("hidden")) {
+        noteBox.classList.remove("hidden")
+    } else {
+        noteBox.classList.add("hidden");
+    }
 }
 
 const notelist = document.getElementById("noteList");
@@ -69,11 +74,11 @@ form.addEventListener("submit", (e) => {
     let notetext = document.getElementById("noteText");
 
     const mainDiv = document.createElement('div');
-    mainDiv.classList.add("mx-auto", "relative", "justify-start", "align-center", "w-[650px]", "mt-6", "mb-10", "h-[85px]", "flex", "flex-col-reverse", "animate-fade-in-left");
+    mainDiv.classList.add("mx-auto", "relative", "justify-start", "align-center", "lg:w-[650px]", "md:w-[500px]", "sm:w-[300px]", "w-[150px]", "mt-6", "mb-10", "h-[85px]", "flex", "flex-col-reverse", "animate-left-fade-fast");
     mainDiv.id = Math.floor(Math.random() * 100);
 
     const newDiv = document.createElement('div');
-    newDiv.classList.add("mx-auto", "relative", "justify-center", "align-center", "w-[510px]", "mb-6");
+    newDiv.classList.add("mx-auto", "relative", "justify-center", "align-center", "lg:w-[510px]", "md:w-[400px]", "sm:w-[200px]", "w-[50px]", "mb-6");
     newDiv.id = Math.floor(Math.random() * 100);
 
     mainDiv.appendChild(newDiv);
@@ -87,7 +92,7 @@ form.addEventListener("submit", (e) => {
 
     const editImg = document.createElement('img');
     editImg.src = './pencil.png';
-    editImg.classList.add("absolute", "bottom-0", "left-0", "w-8", "h-8");
+    editImg.classList.add("absolute", "bottom-0", "left-0", "w-8", "h-8", "cursor-pointer");
 
     mainDiv.appendChild(newImg);
     mainDiv.appendChild(editImg);

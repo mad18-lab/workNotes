@@ -29,16 +29,22 @@
                             '0%': { opacity: 0, transform: 'translateX(-100%)' },
                             '100%': { opacity: 1, transform: 'translateX(0)' },
                         },
+
+                        fadeInLeftFast: {
+                            '0%': { opacity: 0, transform: 'translateX(-100%)' },
+                            '100%': { opacity: 1, transform: 'translateX(0)' },
+                        },
                         
                         fadeInTop: {
                             '0%': { opacity: 0, transform: 'translateY(100%)' },
                             '100%': { opacity: 1, transform: 'translateY(0)' },
-                        }
+                        },
                     },
 
                     animation: {
                         'fade-in-left': 'fadeInLeft 3s ease-in-out forwards',
                         'fade-in-top': 'fadeInTop 3s ease-in-out forwards',
+                        'left-fade-fast': 'fadeInLeftFast 2s ease-in-out forwards',
                     },
                 },
             },
@@ -47,21 +53,25 @@
 </head>
 <body class="bg-[url('./bg.jpg')]">
     <div class="relative mt-16">
-        <p id="date" class="absolute pt-12 pl-16 text-white font-right animate-fade-in-top text-3xl">hi hello</p>
-        <h1 class="text-center text-white text-[100px] font-right animate-fade-in-left">WorkNotes</h1>
+        <div>
+            <p id="date" class="text-white text-center font-right animate-fade-in-top text-3xl">hi hello</p>
+        </div>
+        <div class="sm:w-[500px] w-[400px] mx-auto justify-center align-center">
+            <h1 class="text-white text-[75px] sm:text-[100px] font-right animate-fade-in-left">WorkNotes</h1>
+        </div>
     </div>
     <div class="w-[300px] mx-auto justify-center align-center mt-4">
         <div class="flex justify-between align-center">
-            <button onclick="noteInput()" class="w-28 h-20 text-center font-ibm bg-black text-white rounded-lg shadow-inner">Note Something Down</button>
-            <button class="w-28 h-20 text-center font-ibm bg-black text-white px-2 rounded-lg shadow-inner">Set a Reminder</button>
+            <button onclick="noteInput()" class="w-28 h-20 transform transition duration-500 hover:scale-110 text-center font-ibm bg-black text-white rounded-lg shadow-inner">Note Something Down</button>
+            <button class="w-28 h-20 text-center font-ibm transform transition duration-500 hover:scale-110 bg-black text-white px-2 rounded-lg shadow-inner">Set a Reminder</button>
         </div>
     </div>
-    <div id="note" class="mt-16 w-[800px] mx-auto justify-center align-center hidden">
+    <div id="note" class="mt-16 lg:w-[800px] md:w-[650px] sm:w-[450px] w-[300px] mx-auto justify-center align-center hidden">
         <form id="inputForm">
             <input id="noteText" type="text" autocomplete="off" class="w-full h-10 rounded-lg hover:outline-slate-800 pl-2"/>
         </form>
     </div>
-    <div id="noteList" class="mt-16 w-[800px] mx-auto justify-center align-center rounded-lg hidden">
+    <div id="noteList" class="mt-16 lg:w-[800px] md:w-[650px] sm:w-[450px] w-[300px] mx-auto justify-center align-center rounded-lg hidden">
         
     </div>
     <script src="script.js"></script>

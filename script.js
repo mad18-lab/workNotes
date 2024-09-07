@@ -95,7 +95,7 @@ form.addEventListener("submit", (e) => {
     const newEntry = document.createElement('p');
 
     newEntry.textContent = notetext.value;
-    newEntry.classList.add("text-white", "text-center", "text-2xl", "cursor-pointer", "align-center");
+    newEntry.classList.add("text-white", "text-center", "text-2xl", "cursor-pointer", "font-ibm", "align-center");
     newEntry.id = Math.floor(Math.random() * 100);
     newEntry.addEventListener('click', function() {
         onDivClick(newEntry.id);

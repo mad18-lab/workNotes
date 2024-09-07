@@ -3,18 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <title>WorkNotes</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    backgroundImage: {
+                        'hero-pattern': "url('./bg.jpg')",
+                    },
+
+                    fontFamily: {
+                        right: ['Righteous', 'sans-serif'],
+                        ibm: ['IBM Plex Sans', 'sans-serif'],
+                    },
+
+                    keyframes: {
+                        fadeInLeft: {
+                            '0%': { opacity: 0, transform: 'translateX(-100%)' },
+                            '100%': { opacity: 1, transform: 'translateX(0)' },
+                        },
+                        
+                        fadeInTop: {
+                            '0%': { opacity: 0, transform: 'translateY(100%)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        }
+                    },
+
+                    animation: {
+                        'fade-in-left': 'fadeInLeft 3s ease-in-out forwards',
+                        'fade-in-top': 'fadeInTop 3s ease-in-out forwards',
+                    },
+                },
+            },
+        }
+    </script>
 </head>
 <body class="bg-[url('./bg.jpg')]">
     <div class="relative mt-16">
-        <p id="date" class="absolute pt-12 pl-16 text-white font-[Playwrite] text-3xl">hi hello</p>
-        <h1 class="text-center text-white text-[80px] font-[Playwrite] font-semibold">WorkNotes</h1>
+        <p id="date" class="absolute pt-12 pl-16 text-white font-right animate-fade-in-top text-3xl">hi hello</p>
+        <h1 class="text-center text-white text-[100px] font-right animate-fade-in-left">WorkNotes</h1>
     </div>
     <div class="w-[300px] mx-auto justify-center align-center mt-4">
         <div class="flex justify-between align-center">
-            <button onclick="noteInput()" class="w-28 h-20 text-center bg-black text-white rounded-lg shadow-inner">Note Something Down</button>
-            <button class="w-28 h-20 text-center bg-black text-white px-2 rounded-lg shadow-inner">Set a Reminder</button>
+            <button onclick="noteInput()" class="w-28 h-20 text-center font-ibm bg-black text-white rounded-lg shadow-inner">Note Something Down</button>
+            <button class="w-28 h-20 text-center font-ibm bg-black text-white px-2 rounded-lg shadow-inner">Set a Reminder</button>
         </div>
     </div>
     <div id="note" class="mt-16 w-[800px] mx-auto justify-center align-center hidden">

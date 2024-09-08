@@ -33,6 +33,12 @@ const onDivClick = function(id) {
 
 const onImgClick = function(divId) {
     const element = document.getElementById(divId);
+    element.classList.add("animate-fade-out-right");
+    // element.remove();
+}
+
+const onDelClick = function(divId) {
+    const element = document.getElementById(divId);
     element.remove();
 }
 
@@ -73,45 +79,53 @@ form.addEventListener("submit", (e) => {
 
     let notetext = document.getElementById("noteText");
 
+    // Main div with hover scaling
     const mainDiv = document.createElement('div');
-    mainDiv.classList.add("mx-auto", "relative", "justify-start", "align-center", "lg:w-[650px]", "md:w-[500px]", "sm:w-[300px]", "w-[150px]", "mt-6", "mb-10", "h-[85px]", "flex", "flex-col-reverse", "animate-left-fade-fast");
+    mainDiv.classList.add("mx-auto", "relative", "transform", "transition", "hover:scale-110", "duration-500", "flex", "lg:w-[650px]", "md:w-[500px]", "sm:w-[300px]", "w-[150px]", "mt-6", "mb-10", "h-[85px]", "flex-col-reverse", "bg-[#15065c]");
     mainDiv.id = Math.floor(Math.random() * 100);
 
+    // Inner div for note content
     const newDiv = document.createElement('div');
-    newDiv.classList.add("mx-auto", "relative", "justify-center", "align-center", "lg:w-[510px]", "md:w-[400px]", "sm:w-[200px]", "w-[50px]", "mb-6");
+    newDiv.classList.add("flex", "justify-between", "items-center", "lg:w-[510px]", "md:w-[400px]", "sm:w-[200px]", "w-[50px]", "mb-6");
     newDiv.id = Math.floor(Math.random() * 100);
 
-    mainDiv.appendChild(newDiv);
-
+    // Trash icon
     const newImg = document.createElement('img');
     newImg.src = './trash.png';
-    newImg.classList.add("absolute", "bottom-0", "right-0", "w-8", "h-8");
+    newImg.classList.add("w-8", "h-8", "cursor-pointer");
     newImg.addEventListener("click", function() {
         onImgClick(mainDiv.id);
-    })
+        onDelClick(mainDiv.id);
+    });
 
+    // Pencil icon
     const editImg = document.createElement('img');
     editImg.src = './pencil.png';
-    editImg.classList.add("absolute", "bottom-0", "left-0", "w-8", "h-8", "cursor-pointer");
+    editImg.classList.add("w-8", "h-8", "cursor-pointer");
+    editImg.addEventListener("click", function() {
+        onEditClick(newDiv.id, newEntry.textContent);
+    });
 
-    mainDiv.appendChild(newImg);
-    mainDiv.appendChild(editImg);
-
+    // New entry (text)
     const newEntry = document.createElement('p');
-
     newEntry.textContent = notetext.value;
-    newEntry.classList.add("text-white", "text-center", "text-2xl", "cursor-pointer", "font-ibm", "align-center");
+    newEntry.classList.add("text-white", "text-center", "text-2xl", "cursor-pointer", "font-ibm");
     newEntry.id = Math.floor(Math.random() * 100);
     newEntry.addEventListener('click', function() {
         onDivClick(newEntry.id);
     });
 
-    editImg.addEventListener("click", function() {
-        onEditClick(newDiv.id, newEntry.textContent);
-    })
-
+    // Append icons and text to the note div
     newDiv.appendChild(newEntry);
+    newDiv.appendChild(editImg);
+    newDiv.appendChild(newImg);
+
+    // Append note content to the main div
+    mainDiv.appendChild(newDiv);
+
+    // Append the main div to the note list
     notelist.appendChild(mainDiv);
 
+    // Clear input field
     notetext.value = "";
-})
+});

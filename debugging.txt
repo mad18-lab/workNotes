@@ -15,3 +15,15 @@ in the onclick functionality of the tasks, first i verified whether the classlis
 fix #5 - added the edit functionality by adding an input form on click which takes in the specific div which needs to be updated as well as the content of the
 already generated entry as parameters. in the onsubmit event listener of the form, update the values by query selecting the "p" elements in the div (there's only one)
 and updating their text content with the input value.
+
+fix #6 - removed tailwind.config.js file as it is not necessary for HTML/CSS/JS projects. added the configurations
+within the declaration of tailwind script in the HTML head
+
+fix #7 - added animations for fade-in-left and fade-out-right
+
+fix #8 - deleted the element after fading out to right by setting a time out once the animation is complete
+
+fix #9 - used tailwind class "break-words" to break the words incase they exceed the newDiv's width.
+
+fix #10 - set the main div to relative with space-y-4 (vertical space between its elements) as 4 and padding as
+4 as well. newDiv w as full, iconDiv w as full too.

@@ -34,12 +34,12 @@ const onDivClick = function(id) {
 const onImgClick = function(divId) {
     const element = document.getElementById(divId);
     element.classList.add("animate-fade-out-right");
-    // element.remove();
-}
 
-const onDelClick = function(divId) {
-    const element = document.getElementById(divId);
-    element.remove();
+    setTimeout(() => {
+        element.remove();
+    }, 1000);
+
+    // element.remove();
 }
 
 const onEditClick = function(divId, note) {
@@ -81,13 +81,25 @@ form.addEventListener("submit", (e) => {
 
     // Main div with hover scaling
     const mainDiv = document.createElement('div');
-    mainDiv.classList.add("mx-auto", "relative", "transform", "transition", "hover:scale-110", "duration-500", "flex", "lg:w-[650px]", "md:w-[500px]", "sm:w-[300px]", "w-[150px]", "mt-6", "mb-10", "h-[85px]", "flex-col-reverse", "bg-[#15065c]");
+    mainDiv.classList.add("mx-auto", "relative", "transform", "transition", "hover:scale-110", "duration-500", "lg:w-[650px]", "md:w-[500px]", "w-[300px]", "mt-6", "mb-10", "bg-[#15065c]", "animate-left-fade-fast", "rounded-lg", "p-4", "flex", "flex-col", "space-y-4", "items-center", "justify-center");
     mainDiv.id = Math.floor(Math.random() * 100);
 
     // Inner div for note content
     const newDiv = document.createElement('div');
-    newDiv.classList.add("flex", "justify-between", "items-center", "lg:w-[510px]", "md:w-[400px]", "sm:w-[200px]", "w-[50px]", "mb-6");
-    newDiv.id = Math.floor(Math.random() * 100);
+    newDiv.classList.add("w-full", "flex", "flex-col", "items-center");
+
+    // New entry (text)
+    const newEntry = document.createElement('p');
+    newEntry.textContent = notetext.value;
+    newEntry.classList.add("text-white", "text-center", "sm:text-2xl", "text-xl", "cursor-pointer", "font-ibm", "break-words", "whitespace-normal", "w-full");
+    newEntry.id = Math.floor(Math.random() * 100);
+    newEntry.addEventListener('click', function() {
+        onDivClick(newEntry.id);
+    });
+
+    // Icons
+    const iconDiv = document.createElement('div');
+    iconDiv.classList.add("flex", "justify-between", "w-full", "mt-4");
 
     // Trash icon
     const newImg = document.createElement('img');
@@ -95,7 +107,6 @@ form.addEventListener("submit", (e) => {
     newImg.classList.add("w-8", "h-8", "cursor-pointer");
     newImg.addEventListener("click", function() {
         onImgClick(mainDiv.id);
-        onDelClick(mainDiv.id);
     });
 
     // Pencil icon
@@ -106,24 +117,20 @@ form.addEventListener("submit", (e) => {
         onEditClick(newDiv.id, newEntry.textContent);
     });
 
-    // New entry (text)
-    const newEntry = document.createElement('p');
-    newEntry.textContent = notetext.value;
-    newEntry.classList.add("text-white", "text-center", "text-2xl", "cursor-pointer", "font-ibm");
-    newEntry.id = Math.floor(Math.random() * 100);
-    newEntry.addEventListener('click', function() {
-        onDivClick(newEntry.id);
-    });
-
-    // Append icons and text to the note div
+    // Append the paragraph (text) to newDiv
     newDiv.appendChild(newEntry);
-    newDiv.appendChild(editImg);
-    newDiv.appendChild(newImg);
 
-    // Append note content to the main div
+    // Append icons to iconDiv
+    iconDiv.appendChild(editImg);
+    iconDiv.appendChild(newImg);
+
+    // Append iconDiv to newDiv
+    newDiv.appendChild(iconDiv);
+
+    // Append newDiv to mainDiv
     mainDiv.appendChild(newDiv);
 
-    // Append the main div to the note list
+    // Append mainDiv to notelist
     notelist.appendChild(mainDiv);
 
     // Clear input field

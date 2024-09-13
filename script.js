@@ -42,6 +42,27 @@ const onImgClick = function(divId) {
     // element.remove();
 }
 
+const isPriority = function(divId, buttonId) {
+    const element = document.getElementById(divId);
+    const button = document.getElementById(buttonId);
+
+    let list = element.classList;
+
+    if (list.contains("bg-[#042d6b]")) {
+        element.classList.remove("bg-[#042d6b]");
+        button.classList.remove("outline-red-700", "text-red-400");
+        element.classList.add("bg-[#bf0a0a]");
+        button.classList.add("outline-black", "text-black");
+        button.textContent = "Mark as Regular";
+    } else if (list.contains("bg-[#bf0a0a]")) {
+        element.classList.remove("bg-[#bf0a0a]");
+        button.classList.remove("outline-black", "text-black");
+        element.classList.add("bg-[#042d6b]");
+        button.classList.add("outline-red-700", "text-red-400");
+        button.textContent = "Mark as Priority";
+    }
+}
+
 const onEditClick = function(divId, note) {
     let og = note;
     const editForm = document.createElement("form");
@@ -81,7 +102,7 @@ form.addEventListener("submit", (e) => {
 
     // Main div with hover scaling
     const mainDiv = document.createElement('div');
-    mainDiv.classList.add("mx-auto", "relative", "transform", "transition", "hover:scale-110", "duration-500", "lg:w-[650px]", "md:w-[500px]", "w-[300px]", "mt-6", "mb-10", "bg-[#15065c]", "animate-left-fade-fast", "rounded-lg", "p-4", "flex", "flex-col", "space-y-4", "items-center", "justify-center");
+    mainDiv.classList.add("mx-auto", "relative", "transform", "transition", "hover:scale-110", "duration-500", "lg:w-[650px]", "md:w-[500px]", "w-[300px]", "mt-6", "mb-10", "bg-[#042d6b]", "animate-left-fade-fast", "rounded-lg", "p-4", "flex", "flex-col", "space-y-4", "items-center", "justify-center");
     mainDiv.id = Math.floor(Math.random() * 100);
 
     // Inner div for note content
@@ -109,6 +130,15 @@ form.addEventListener("submit", (e) => {
         onImgClick(mainDiv.id);
     });
 
+    //priority button
+    const redButt = document.createElement('button');
+    redButt.id = Math.floor(Math.random() * 100);
+    redButt.textContent = 'Mark as Priority';
+    redButt.classList.add("p-2", "text-red-400", "font-bold", "font-ibm", "outline", "outline-2", "outline-offset-2", "outline-red-700", "rounded-lg")
+    redButt.addEventListener("click", function() {
+        isPriority(mainDiv.id, redButt.id);
+    });
+
     // Pencil icon
     const editImg = document.createElement('img');
     editImg.src = './pencil.png';
@@ -122,6 +152,7 @@ form.addEventListener("submit", (e) => {
 
     // Append icons to iconDiv
     iconDiv.appendChild(editImg);
+    iconDiv.appendChild(redButt);
     iconDiv.appendChild(newImg);
 
     // Append iconDiv to newDiv

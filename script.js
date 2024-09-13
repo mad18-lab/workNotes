@@ -63,32 +63,27 @@ const isPriority = function(divId, buttonId) {
     }
 }
 
-const onEditClick = function(divId, note) {
-    let og = note;
-    const editForm = document.createElement("form");
-    const editInput = document.createElement("input");
+const onEditClick = function(divId, noteId) {
+    const textDiv = document.getElementById(divId);
+    const note = document.getElementById(noteId);
 
-    editForm.classList.add("absolute", "-inset-3");
+    const newInput = document.createElement("input");
+    newInput.type = "text";
+    newInput.value = note.textContent;
 
-    editInput.classList.add("mx-auto", "relative", "justify-center", "align-center", "w-[510px]", "h-[85px]", "mt-4", "mb-6", "pl-2", "rounded-md");
+    newInput.classList.add("w-full", "p-2", "rounded-lg", "bg-white", "text-black", "text-center", "sm:text-2xl", "text-xl", "cursor-pointer", "font-ibm", "break-words", "whitespace-normal");
 
-    editForm.appendChild(editInput);
+    textDiv.replaceWith(newInput);
 
-    editInput.value = og;
+    newInput.addEventListener("keydown", function(e) {
+        if (e.key == "Enter") {
+            const updatedText = newInput.value;
 
-    const element = document.getElementById(divId);
+            note.textContent = updatedText;
 
-    element.appendChild(editForm);
-
-    editForm.addEventListener("submit", function(e) {
-        e.preventDefault();
-
-        let newEntry = element.querySelector("p");
-
-        newEntry.textContent = editInput.value;
-
-        element.removeChild(editForm);
-    })
+            newInput.replaceWith(textDiv);
+        }
+    });
 }
 
 
@@ -108,6 +103,7 @@ form.addEventListener("submit", (e) => {
     // Inner div for note content
     const newDiv = document.createElement('div');
     newDiv.classList.add("w-full", "flex", "flex-col", "items-center");
+    newDiv.id = Math.floor(Math.random() * 100);
 
     // New entry (text)
     const newEntry = document.createElement('p');
@@ -144,7 +140,7 @@ form.addEventListener("submit", (e) => {
     editImg.src = './pencil.png';
     editImg.classList.add("w-8", "h-8", "cursor-pointer");
     editImg.addEventListener("click", function() {
-        onEditClick(newDiv.id, newEntry.textContent);
+        onEditClick(newDiv.id, newEntry.id);
     });
 
     // Append the paragraph (text) to newDiv

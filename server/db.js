@@ -1,14 +1,12 @@
-require('dotenv').config();
-const mysql = require("mysql2");
+const mongoose = require('mongoose');
 
-const pool = mysql.createPool({
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PWD,
-    database: process.env.DB_NAME,
-    port: process.env.DB_PORT,
+const noteSchema = new mongoose.Schema({
+    date: { type: String, required: true },
+    entry: { type: String, required: true },
+    completed: { type: String, required: true },
+    priority: { type: String, required: true },
 });
 
-const promisePool = pool.promise();
+const noteModel = mongoose.model('noteModel', noteSchema);
 
-module.exports= promisePool;
+module.exports = noteModel;

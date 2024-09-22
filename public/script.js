@@ -86,6 +86,36 @@ const onEditClick = function(divId, noteId) {
     });
 }
 
+const saveEntry = async function(entryId, divId) {
+    let entry = document.getElementById(entryId);
+    let main = document.getElementById(divId);
+
+    let note = {
+        date: dateNow.textContent,
+        entry: entry.textContent,
+        completed: entry.classList.contains("line-through") ? "Yes" : "No",
+        priority: main.classList.contains("bg-[#042d6b]") ? "No" : "Yes",
+    }
+
+    try {
+        const response = await fetch('http://localhost:7878/', {
+            method: 'POST',
+
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            
+            body: JSON.stringify(note),
+        });
+
+        const data = await response.json()
+
+        console.log("Note saved: ", data);
+    } catch (error) {
+        console.log("Error saving note: ", error);
+    }
+}
+
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -118,14 +148,6 @@ form.addEventListener("submit", (e) => {
     const iconDiv = document.createElement('div');
     iconDiv.classList.add("flex", "justify-between", "w-full", "mt-4");
 
-    // Trash icon
-    const newImg = document.createElement('img');
-    newImg.src = './trash.png';
-    newImg.classList.add("w-8", "h-8", "cursor-pointer");
-    newImg.addEventListener("click", function() {
-        onImgClick(mainDiv.id);
-    });
-
     //priority button
     const redButt = document.createElement('button');
     redButt.id = Math.floor(Math.random() * 100);
@@ -135,9 +157,18 @@ form.addEventListener("submit", (e) => {
         isPriority(mainDiv.id, redButt.id);
     });
 
+    // Trash icon
+    const newImg = document.createElement('img');
+    newImg.src = './images/trash.png';
+    newImg.classList.add("w-8", "h-8", "cursor-pointer");
+    newImg.addEventListener("click", function() {
+        onImgClick(mainDiv.id);
+        saveEntry(newEntry.id, mainDiv.id);
+    });
+
     // Pencil icon
     const editImg = document.createElement('img');
-    editImg.src = './pencil.png';
+    editImg.src = './images/pencil.png';
     editImg.classList.add("w-8", "h-8", "cursor-pointer");
     editImg.addEventListener("click", function() {
         onEditClick(newDiv.id, newEntry.id);

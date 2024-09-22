@@ -16,36 +16,30 @@
             theme: {
                 extend: {
                     backgroundImage: {
-                        'hero-pattern': "url('./bg.jpg')",
+                        'hero-pattern': "url('./images/bg.jpg')",
                     },
-
                     fontFamily: {
                         right: ['Righteous', 'sans-serif'],
                         ibm: ['IBM Plex Sans', 'sans-serif'],
                     },
-
                     keyframes: {
                         fadeInLeft: {
                             '0%': { opacity: 0, transform: 'translateX(-100%)' },
                             '100%': { opacity: 1, transform: 'translateX(0)' },
                         },
-
                         fadeInLeftFast: {
                             '0%': { opacity: 0, transform: 'translateX(-100%)' },
                             '100%': { opacity: 1, transform: 'translateX(0)' },
                         },
-                        
                         fadeInTop: {
                             '0%': { opacity: 0, transform: 'translateY(100%)' },
                             '100%': { opacity: 1, transform: 'translateY(0)' },
                         },
-
                         fadeOutRight: {
                             '0%': { opacity: 1, transform: 'translateX(0)'},
                             '100%': { opacity: 0, transform: 'translateX(100%)'},
                         },
                     },
-
                     animation: {
                         'fade-in-left': 'fadeInLeft 3s ease-in-out forwards',
                         'fade-in-top': 'fadeInTop 3s ease-in-out forwards',
@@ -57,7 +51,7 @@
         }
     </script>
 </head>
-<body class="bg-[url('./bg.jpg')]">
+<body class="bg-[url('./images/bg.jpg')]">
     <div class="relative mt-16">
         <div>
             <p id="date" class="text-white text-center font-right animate-fade-in-top text-3xl">hi hello</p>

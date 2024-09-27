@@ -9,7 +9,7 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '../public')));
 
-const port = process.env.PORT || 7878;
+const port = process.env.PORT || 4004;
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
